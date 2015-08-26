@@ -7,7 +7,7 @@
     <authors>$author$</authors>
     <owners>$author$</owners>    
     <projectUrl>https://github.com/alcancepl/ddd-es</projectUrl>
-    <iconUrl>https://www.alcance.pl/Content/images/alcanceLogoOnas.png</iconUrl>
+    <iconUrl>https://www.alcance.pl/Content/images/alcanceLogo.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>Initial release of the package.</releaseNotes>
