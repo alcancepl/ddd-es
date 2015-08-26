@@ -5,6 +5,11 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ddd", "Ddd\Ddd.csproj", "{65489708-6481-46BA-A687-B278B2DD3FD8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{12744225-122D-466B-B483-D5041DF311D9}"
+	ProjectSection(SolutionItems) = preProject
+		Build\Ddd.nuspec = Build\Ddd.nuspec
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
