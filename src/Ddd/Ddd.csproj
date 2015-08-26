@@ -45,6 +45,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\AlcanceAssemblyInfo.cs">
+      <Link>Properties\AlcanceAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Commands\CommandContext.cs" />
     <Compile Include="Domain\AggregateRoot.cs" />
     <Compile Include="AuthorizationContext.cs" />

@@ -8,7 +8,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{12744225-122D-466B-B483-D5041DF311D9}"
 	ProjectSection(SolutionItems) = preProject
 		Build\Ddd.nuspec = Build\Ddd.nuspec
+		Build\DddTest.nuspec = Build\DddTest.nuspec
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DddTest", "DddTest\DddTest.csproj", "{E419B369-29B7-4D53-BDB0-373D66D7B8A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +23,10 @@ Global
 		{65489708-6481-46BA-A687-B278B2DD3FD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65489708-6481-46BA-A687-B278B2DD3FD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65489708-6481-46BA-A687-B278B2DD3FD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E419B369-29B7-4D53-BDB0-373D66D7B8A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E419B369-29B7-4D53-BDB0-373D66D7B8A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E419B369-29B7-4D53-BDB0-373D66D7B8A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E419B369-29B7-4D53-BDB0-373D66D7B8A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
