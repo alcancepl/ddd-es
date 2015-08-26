@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Rcs.Eurad.Exceptions
+namespace Ddd.Exceptions
 {    
     public class WrongExpectedVersionException : Exception
     {       

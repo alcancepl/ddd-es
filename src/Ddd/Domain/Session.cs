@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Rcs.Eurad.Domain
+namespace Ddd.Domain
 {
     public class Session : ISession
     {
