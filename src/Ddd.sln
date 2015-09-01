@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ddd", "Ddd\Ddd.csproj", "{6
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DddTest", "DddTest\DddTest.csproj", "{E419B369-29B7-4D53-BDB0-373D66D7B8A8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocDb", "DocDb\DocDb.csproj", "{6731E605-3D97-4DAD-8EE0-73209B3FC40A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{E419B369-29B7-4D53-BDB0-373D66D7B8A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E419B369-29B7-4D53-BDB0-373D66D7B8A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E419B369-29B7-4D53-BDB0-373D66D7B8A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6731E605-3D97-4DAD-8EE0-73209B3FC40A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6731E605-3D97-4DAD-8EE0-73209B3FC40A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6731E605-3D97-4DAD-8EE0-73209B3FC40A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6731E605-3D97-4DAD-8EE0-73209B3FC40A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
