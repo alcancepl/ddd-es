@@ -12,6 +12,6 @@ namespace Ddd.Events
     /// </summary>
     public interface IEventPublisher
     {
-        Task PublishAsync<TEvent>(Commands.CommandContext context, TEvent @event, CancellationToken cancellationToken = default(CancellationToken)) where TEvent : class, IEvent;
-    }
+		Task PublishAsync<TEvent>(Commands.CommandContext context, IEnumerable<TEvent> @events, CancellationToken cancellationToken = default(CancellationToken)) where TEvent : class, IEvent;
+	}
 }

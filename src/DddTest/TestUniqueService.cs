@@ -17,7 +17,7 @@ namespace DddTest
 
         private static ConcurrentDictionary<string, ConcurrentDictionary<string, Guid>> groups;
 
-        public Guid GetOrAddUniqueValueKey(string valueGroup, string value, Guid requestedKey, bool ignoreCase = true)
+        public Task<Guid> GetOrAddUniqueValueKey(string valueGroup, string value, Guid requestedKey, bool ignoreCase = true)
         {
             if (string.IsNullOrEmpty(valueGroup))
                 throw new ArgumentNullException("valueGroup");
@@ -38,15 +38,15 @@ namespace DddTest
             if (res == Guid.Empty)
             {
                 groupValues.TryUpdate(value, requestedKey, Guid.Empty);
-                return requestedKey;
+                return Task.FromResult(requestedKey);
             }
             else
             {
-                return res;
+                return Task.FromResult(res);
             }
         }
 
-        public bool TryGetUniqueValueKey(string valueGroup, string value, out Guid key, bool ignoreCase = true)
+        public Task<Tuple<bool, Guid>> TryGetUniqueValueKey(string valueGroup, string value, bool ignoreCase = true)
         {
             if (string.IsNullOrEmpty(valueGroup))
                 throw new ArgumentNullException("valueGroup");
@@ -55,17 +55,18 @@ namespace DddTest
 
             ConcurrentDictionary<string, Guid> groupValues;
 
-            if (!groups.TryGetValue(valueGroup, out groupValues))
+			Guid key;
+			if (!groups.TryGetValue(valueGroup, out groupValues))
             {
                 key = Guid.Empty;
-                return false;
+                return Task.FromResult(new Tuple<bool, Guid>(false, key));
             }
 
             var res = groupValues.TryGetValue(value, out key);
-            return res && key != Guid.Empty;
+            return Task.FromResult(new Tuple<bool, Guid>(res && key != Guid.Empty, key));
         }
 
-        public bool TryRemoveUniqueValueKey(string valueGroup, string value, Guid key, bool ignoreCase = true)
+        public Task<bool> TryRemoveUniqueValueKey(string valueGroup, string value, Guid key, bool ignoreCase = true)
         {
             if (string.IsNullOrEmpty(valueGroup))
                 throw new ArgumentNullException("valueGroup");
@@ -77,11 +78,11 @@ namespace DddTest
             if (!groups.TryGetValue(valueGroup, out groupValues))
             {
                 key = Guid.Empty;
-                return false;
+                return Task.FromResult(false);
             }
 
 
-            return groupValues.TryUpdate(value, Guid.Empty, key);
+            return Task.FromResult(groupValues.TryUpdate(value, Guid.Empty, key));
         }
 
         public void Clear()
