@@ -8,7 +8,7 @@ namespace DocDb
 	public class DocumentWrap<T> : Document
 	{
 		//[JsonProperty("Type")]
-		//public string Type { get; set; }
+		//public string DocumentType { get; set; }
 
 		[JsonProperty("Document")]
 		public T Document { get; set; }
@@ -20,15 +20,26 @@ namespace DocDb
 		{
 			if (obj == null) return null;
 
+
 			return new DocumentWrap<T>()
 			{
-				Id = DocumentWrapHelper.ConcateIds(obj.GetType().Name, selectId(obj)),
+				Id = DocumentWrapHelper.ConcateIds(GetTypeNameWithBaseTypes(typeof(T)), selectId(obj)),
 				Document = obj
-				//Type = obj.GetType().Name
+				//DocumentType = GetTypeNameWithBaseTypes(typeof(T))
 			};
 		}
 
-
+		public static string GetTypeNameWithBaseTypes(Type forType)
+		{
+			var typeFullName = forType.Name;
+			var baseType = forType.BaseType;
+			while (baseType != typeof(System.Object))
+			{
+				typeFullName = baseType.Name + "::" + typeFullName;
+				baseType = baseType.BaseType;
+			}
+			return typeFullName;
+		}
 
 		public static string ConcateIds(params object[] list)
 		{

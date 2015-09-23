@@ -14,7 +14,7 @@ namespace DocDb
 
 		//Expose the "database" value from configuration as a property for internal use
 		private static string databaseId;
-		private static String DatabaseId
+		public static String DatabaseId
 		{
 			get
 			{
@@ -29,7 +29,7 @@ namespace DocDb
 
 		//Expose the "collection" value from configuration as a property for internal use
 		private static string collectionId;
-		private static String CollectionId
+		public static String CollectionId
 		{
 			get
 			{
@@ -44,7 +44,7 @@ namespace DocDb
 
 		//Use the ReadOrCreateDatabase function to get a reference to the database.
 		private static Database database;
-		private static Database Database
+		public static Database Database
 		{
 			get
 			{
@@ -62,7 +62,7 @@ namespace DocDb
 
 		//Use the ReadOrCreateCollection function to get a reference to the collection.
 		private static DocumentCollection collection;
-		private static DocumentCollection Collection
+		public static DocumentCollection Collection
 		{
 			get
 			{
@@ -84,7 +84,7 @@ namespace DocDb
 		//and then reuses this instance for the duration of the application avoiding the
 		//overhead of instantiating a new instance of DocumentClient with each request
 		private static DocumentClient client;
-		private static DocumentClient Client
+		public static DocumentClient Client
 		{
 			get
 			{
@@ -101,9 +101,8 @@ namespace DocDb
 		}
 
 
-		public static async Task<Document> CreateItemAsync(DocumentWrap<T> item)
+		public static async Task<Document> CreateItemAsync(DocumentWrap<T> item, bool disableAutomaticIdGeneration = true)
 		{
-			var disableAutomaticIdGeneration = true;
 			return await Client.CreateDocumentAsync(Collection.SelfLink, item, null, disableAutomaticIdGeneration);
 		}
 
@@ -118,13 +117,17 @@ namespace DocDb
 		public static async Task<T> GetItem(Expression<Func<T, bool>> predicate)
 		{
 			var query = Client.CreateDocumentQuery<DocumentWrap<T>>(Collection.DocumentsLink)
-				.Where(d => d.Id.StartsWith(String.Format("{0}|", typeof(T).Name)))
+				.Where(d => d.Id.StartsWith(DocumentWrapHelper.GetTypeNameWithBaseTypes(typeof(T))))
 				.Select(d => d.Document)
 				.Where(predicate)
 				.AsDocumentQuery();
 
 			var feed = await query.ExecuteNextAsync();
 			return feed.AsEnumerable().Single();
+		}
+
+		public static IQueryable<T> DocumentQuery(string sql = null) {
+			return sql == null ? Client.CreateDocumentQuery<T>(Collection.DocumentsLink) : Client.CreateDocumentQuery<T>(Collection.DocumentsLink, sql);
 		}
 
 		public static async Task<IEnumerable<DocumentWrap<T>>> GetWrapedItems(Expression<Func<DocumentWrap<T>, bool>> predicate)
@@ -140,7 +143,7 @@ namespace DocDb
 		public static async Task<IEnumerable<T>> GetItems(Expression<Func<T, bool>> predicate)
 		{
 			var query = Client.CreateDocumentQuery<DocumentWrap<T>>(Collection.DocumentsLink)
-				.Where(d => d.Id.StartsWith(String.Format("{0}|", typeof(T).Name)))
+				.Where(d => d.Id.StartsWith(DocumentWrapHelper.GetTypeNameWithBaseTypes(typeof(T))))
 				.Select(d => d.Document)
 				.Where(predicate)
 				.AsDocumentQuery();

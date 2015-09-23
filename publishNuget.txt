@@ -1,0 +1,21 @@
+1.       Checkout repository https://github.com/alcancepl/ddd-es
+2.       Dodaj csproj do solucji (daj krótka, adekwatna nazwe). Dodaj istniejacy AlcanceAssemblyInfo.cs jako LINK, usun niepotrzebne wpisy w AssemblyInfo.cs
+3.       Wpisz jakis sensowny tytul i opis w preferencjach projektu (patrz projekt Ddd jako zródlo inspiracji).
+4.       Zmien mu zródlo (plik .csproj) tak, aby defaultowa konfiguracja bylo Release. (unload, edit, reload)
+5.       W nowym projekcie dodaj project reference do Ddd.
+6.       Dodaj niezbedne nugety do nowego projektu, jak zwykle.
+7.       Compile Release.
+8.       Otwórz cmd i idz do folderu, gdzie jest csproj.
+9.       Odpal:
+
+..\..\tools\nuget setApiKey 08d1f9ce-39e4-4776-a1a6-846ab3a91699
+
+..\..\tools\nuget spec
+
+?  Wyedytuj nowopowstaly plik . nuspec (zobacz analogiczny plik w projekcie Ddd)
+?  Dodaj .nuspec do projektu (add existing item)
+?  Na koncu znowu w tym samym cmd
+
+..\..\tools\nuget pack MySuperProject.csproj
+
+..\..\tools\nuget push MySuperProject.1.0.0.0.nupkg
