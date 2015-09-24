@@ -143,7 +143,7 @@ namespace DocDb
 		public static async Task<IEnumerable<T>> GetItems(Expression<Func<T, bool>> predicate)
 		{
 			var query = Client.CreateDocumentQuery<DocumentWrap<T>>(Collection.DocumentsLink)
-				.Where(d => d.Id.StartsWith(DocumentWrapHelper.GetTypeNameWithBaseTypes(typeof(T))))
+				.Where(d => d.Id.StartsWith(DocumentWrapHelper.GetTypeNameWithBaseTypes(typeof(T)) + DocumentConsts.IdDevider))
 				.Select(d => d.Document)
 				.Where(predicate)
 				.AsDocumentQuery();
@@ -163,7 +163,7 @@ namespace DocDb
 
 		public static async Task<T> TryGetById(string id)
 		{
-			var formatedId = String.Format("{0}|{1}", typeof(T).Name, id);
+			var formatedId = String.Format("{0}{1}{2}", typeof(T).Name, DocumentConsts.IdDevider, id);
 			var document = await GetDocument(formatedId);
 			if (document == null)
 			{

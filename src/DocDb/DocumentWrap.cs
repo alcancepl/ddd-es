@@ -35,7 +35,7 @@ namespace DocDb
 			var baseType = forType.BaseType;
 			while (baseType != typeof(System.Object))
 			{
-				typeFullName = baseType.Name + "::" + typeFullName;
+				typeFullName = baseType.Name + DocumentConsts.BaseClassTypesDevider + typeFullName;
 				baseType = baseType.BaseType;
 			}
 			return typeFullName;
@@ -43,8 +43,14 @@ namespace DocDb
 
 		public static string ConcateIds(params object[] list)
 		{
-			return list.Select(l => l.ToString()).Aggregate((current, next) => current + "|" + next);
-        }
+			return list.Select(l => l.ToString()).Aggregate((current, next) => current + DocumentConsts.IdDevider + next);
+		}
+	}
+
+	public static class DocumentConsts
+	{
+		public static string BaseClassTypesDevider = "::";
+		public static string IdDevider = "|";
 	}
 
 }
