@@ -69,6 +69,7 @@ namespace DddTest
             container.RegisterSingleton<IEventStore>(theStore);
             container.RegisterSingleton<IRepository, Repository>();
             container.RegisterSingleton<IUniqueService, TestUniqueService>();
+            container.RegisterSingleton<IAutoNrService, TestAutoNrService>();
         }
 
         public void ProcessCommand<TCommand>(TCommand command) where TCommand : class, ICommand

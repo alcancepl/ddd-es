@@ -65,6 +65,7 @@
     <Compile Include="Commands\ICommandSender.cs" />
     <Compile Include="Events\IEventPublisher.cs" />
     <Compile Include="Events\IHandles.cs" />
+    <Compile Include="IAutoNrService.cs" />
     <Compile Include="IMemento.cs" />
     <Compile Include="Messages\IHandler.cs" />
     <Compile Include="Messages\IMessage.cs" />
