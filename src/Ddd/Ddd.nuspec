@@ -10,8 +10,8 @@
     <iconUrl>https://www.alcance.pl/Content/images/alcanceLogo.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Initial release of the package.</releaseNotes>
-    <copyright>Copyright 2015</copyright>
+    <releaseNotes>Second release of the package.</releaseNotes>
+    <copyright>Copyright Alcance 2015</copyright>
     <tags>DDD ES</tags>
   </metadata>
 </package>
