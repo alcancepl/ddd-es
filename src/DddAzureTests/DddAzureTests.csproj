@@ -88,10 +88,6 @@
     <Compile Include="Services\TableStorageAutoNrServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Rcs.Eurad.ClientApi\Rcs.Eurad.ClientApi.csproj">
-      <Project>{2CE906D4-49D0-46E3-BB8E-CFE6F3178DC1}</Project>
-      <Name>Rcs.Eurad.ClientApi</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DddAzure\DddAzure.csproj">
       <Project>{6467053d-bb1e-4fd2-aea7-38790a79f51b}</Project>
       <Name>DddAzure</Name>
