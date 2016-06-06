@@ -1,13 +1,10 @@
 ﻿using Ddd.Events;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ddd.Domain
 {
-    public abstract class AggregateRoot : IAggregate
+    public abstract class AggregateRoot<TAggregateIdentity> : IAggregate<TAggregateIdentity> where TAggregateIdentity: IAggregateIdentity
     {
         private readonly List<IEvent> uncommitedEvents = new List<IEvent>();
         private Dictionary<Type, Action<IEvent>> transitions = new Dictionary<Type, Action<IEvent>>();
@@ -38,7 +35,7 @@ namespace Ddd.Domain
 
         public int Version { get; protected set; }
 
-        public Guid Id { get; protected set; }
+        public TAggregateIdentity Id { get; protected set; }
 
         protected void RegisterTransition<T>(Action<T> transition) where T : class, IEvent
         {
@@ -61,16 +58,21 @@ namespace Ddd.Domain
 
             var eventType = @event.GetType();
             Action<IEvent> transition;
-            if (transitions.TryGetValue(eventType, out transition))
+            if (!transitions.TryGetValue(eventType, out transition))
             {
-                transition(@event);
+                throw new AggregateException($"Cannot apply event {eventType.Name} to aggregate {this}. Transition registration is missing. Event details: {@event}");
             }
+            transition(@event);
             lock (uncommitedEvents)
             {
                 Version++;
             }
         }
 
+        public override string ToString()
+        {
+            return $"{GetType().Name}:{Id}";            
+        }
 
     }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Ddd.Domain;
 
 namespace Ddd.Events
 {
@@ -14,7 +10,7 @@ namespace Ddd.Events
         /// <summary>
         /// Aggregate Root Id this event belongs to.
         /// </summary>
-        Guid Id { get; }
+        IAggregateIdentity Id { get; }
         //int Version { get; set; }
     }
 }

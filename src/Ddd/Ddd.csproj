@@ -32,11 +32,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -49,39 +50,60 @@
       <Link>Properties\AlcanceAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Commands\CommandContext.cs" />
+    <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Domain\AggregateRoot.cs" />
-    <Compile Include="AuthorizationContext.cs" />
+    <Compile Include="Domain\Exceptions\AggregateException.cs" />
     <Compile Include="Domain\Exceptions\AggregateNotFoundException.cs" />
     <Compile Include="Domain\Exceptions\ConcurrencyException.cs" />
     <Compile Include="Domain\Exceptions\MissingAggregateIdException.cs" />
     <Compile Include="Domain\Exceptions\MissingEventIdException.cs" />
+    <Compile Include="Domain\IAggregateIdentity.cs" />
+    <Compile Include="Domain\IReadOnlyRepository.cs" />
     <Compile Include="Domain\IRepository.cs" />
-    <Compile Include="Domain\ISession.cs" />
     <Compile Include="Domain\Repository.cs" />
+    <Compile Include="Events\IEvent.cs" />
     <Compile Include="Events\IEventStore.cs" />
+    <Compile Include="Events\IHandles.cs" />
+    <Compile Include="Events\InMemoryEventStore.cs" />
     <Compile Include="Events\IReadSyncMap.cs" />
     <Compile Include="Events\ReadSyncAttribute.cs" />
-    <Compile Include="Exceptions\UnauthorizedException.cs" />
-    <Compile Include="Commands\ICommandSender.cs" />
-    <Compile Include="Events\IEventPublisher.cs" />
-    <Compile Include="Events\IHandles.cs" />
-    <Compile Include="IMemento.cs" />
+    <Compile Include="Messages\InMemoryMessageBus.cs" />
+    <Compile Include="Services\AggregateNotFoundForAutoNrSeq.cs" />
+    <Compile Include="Services\DuplicateDocumentNrException.cs" />
+    <Compile Include="Services\InMemoryFileSystem.cs" />
+    <Compile Include="Services\IAutoNrService.cs" />
+    <Compile Include="Domain\IAggregate.cs" />
+    <Compile Include="Commands\ICommandHandler.cs" />
+    <Compile Include="Services\IFileSystem.cs" />
+    <Compile Include="Services\InMemoryAutoNrService.cs" />
+    <Compile Include="Services\InMemoryUniqueService.cs" />
+    <Compile Include="Services\IUniqueService.cs" />
     <Compile Include="Messages\IHandler.cs" />
     <Compile Include="Messages\IMessage.cs" />
-    <Compile Include="Domain\IAggregate.cs" />
-    <Compile Include="Commands\ICommand.cs" />
-    <Compile Include="Commands\ICommandHandler.cs" />
-    <Compile Include="IdGenerator.cs" />
-    <Compile Include="Events\IEvent.cs" />
-    <Compile Include="IQuery.cs" />
-    <Compile Include="IQueryHandler.cs" />
-    <Compile Include="IUniqueService.cs" />
+    <Compile Include="Messages\IMessageBus.cs" />
+    <Compile Include="Messages\MessagesHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sagas\FindSagas.cs" />
+    <Compile Include="Sagas\ISagaData.cs" />
+    <Compile Include="Sagas\ISagaPersister.cs" />
+    <Compile Include="Sagas\ISagaStartedBy.cs" />
+    <Compile Include="Sagas\Saga.cs" />
+    <Compile Include="Sagas\ISagaFinder.cs" />
+    <Compile Include="Sagas\SagaHandler.cs" />
+    <Compile Include="Sagas\SagaMessage.cs" />
+    <Compile Include="Sagas\SagaMetadata.cs" />
+    <Compile Include="Sagas\SagaMetadataCollection.cs" />
+    <Compile Include="Sagas\SagaNotFoundException.cs" />
+    <Compile Include="Services\UniqueEntityWithTheSameIdException.cs" />
+    <Compile Include="TaskEx.cs" />
+    <Compile Include="TypeExtensions.cs" />
+    <Compile Include="ValidateObjectAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Ddd.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

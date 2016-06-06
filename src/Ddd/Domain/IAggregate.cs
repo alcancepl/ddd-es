@@ -1,15 +1,11 @@
 ﻿using Ddd.Events;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ddd.Domain
 {
-    public interface IAggregate
+    public interface IAggregate<TAggregateIdentity> where TAggregateIdentity: IAggregateIdentity
     {
-        Guid Id { get; }
+        TAggregateIdentity Id { get; }
         int Version { get; }
 
         void ApplyEvent(IEvent @event);

@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Linq;
-using System.Collections.Specialized;
-using System.Collections.ObjectModel;
 
 namespace Ddd.Events
 {
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface, AllowMultiple = true)]
     public class ReadSyncAttribute : Attribute
     {
         public ReadSyncAttribute(params string[] readDbNames)

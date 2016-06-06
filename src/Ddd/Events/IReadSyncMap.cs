@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ddd.Events
 {
@@ -36,22 +33,23 @@ namespace Ddd.Events
             map = new Dictionary<Type, List<string>>();
             foreach (var eventHandler in eventHandlers)
             {
-                var names = eventHandler.GetCustomAttributes(typeof(ReadSyncAttribute), true)
+                var interfaces = eventHandler.GetInterfaces();
+                var names = eventHandler.GetCustomAttributes(typeof(ReadSyncAttribute), true).Union(
+                        interfaces.SelectMany(i => i.GetCustomAttributes(typeof(ReadSyncAttribute), false)))
                     .Cast<ReadSyncAttribute>()
                     .SelectMany(attrib => attrib.Names)
                     .Distinct()
                     .ToList();
                 if (names.Count == 0)
-                    continue; // not marked with attribute [ReadSync("")]
-                var interfaces = eventHandler.GetInterfaces();
+                    continue; // not marked with attribute [ReadSync("")]                
                 foreach (var @interface in interfaces)
                 {
                     if (!@interface.IsGenericType 
-                        || @interface.GetGenericTypeDefinition() != typeof(IHandles<>)
+                        || @interface.GetGenericTypeDefinition() != typeof(Messages.IHandler<>)
                         || @interface.GenericTypeArguments.Length != 1
-                        || !typeof(IEvent).IsAssignableFrom(@interface.GenericTypeArguments[0]))
-                        continue; // implemented interface is not IHandles<TEvent> where TEvent: IEvent
-                    
+                        || !typeof(IMessage).IsAssignableFrom(@interface.GenericTypeArguments[0]))
+                        continue; // implemented interface is not IHandler<TMessage> where TMessage: IMessage
+
                     var eventType = @interface.GenericTypeArguments[0];
 
                     List<string> eventTypeNames;

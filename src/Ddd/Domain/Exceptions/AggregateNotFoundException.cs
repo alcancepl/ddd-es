@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ddd.Domain.Exceptions
 {
-    public class AggregateNotFoundException : System.Exception
+    public class AggregateNotFoundException : AggregateException
     {
-        public AggregateNotFoundException(Type aggregateType, Guid id)
+        public AggregateNotFoundException(Type aggregateType, IAggregateIdentity id)
             : base(string.Format("Aggregate {0} with id {1} was not found.", aggregateType.FullName, id))
         {
         }
